@@ -1,0 +1,9 @@
+{
+    "selector": {
+        "allowId": false,
+        "maxLength": 1
+    },
+    "attributes": {
+
+    }
+}
