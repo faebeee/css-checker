@@ -27,7 +27,7 @@ module.exports = class Renderer {
                 interactive: true,
                 label: 'Result',
                 border: {type: "line", fg: "cyan"},
-                columnWidth: [30, 20, 50],
+                columnWidth: [30, 70],
                 width: 100
             });
 
@@ -40,14 +40,14 @@ module.exports = class Renderer {
             if (result.errors) {
                 for (let x = 0; x < result.errors.length; x++) {
                     let error = result.errors[x];
-                    data.push([result.selector, error.validator, error.messages])
+                    data.push([result.selector, error.validator])
                 }
             }
         }
 
         table.setData(
             {
-                headers: ['Selector', 'Validator', 'Message'],
+                headers: ['Selector', 'Validator'],
                 data
             });
         this.screen.append(table); //must append before setting data
