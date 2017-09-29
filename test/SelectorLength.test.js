@@ -11,7 +11,8 @@ describe('SelectorLength', function() {
             },
             attributes: {}
         };
-        cssChecker.fromString('.test .test2 .test { width: 100%; }', rules)
+        
+	cssChecker.fromString('.test .test2 .test { width: 100%; }', rules)
             .then((result) => {
                 test.fail('Test should fail due to invalid config')
             }, (errors) => {
