@@ -1,6 +1,6 @@
 "use stirct";
 
-const AbstractValidator = require('./AbstractSelectorValidator');
+const AbstractValidator = require('../AbstractSelectorValidator');
 
 module.exports = class SelectorLengthValidator extends AbstractValidator {
     getName() {
@@ -16,4 +16,4 @@ module.exports = class SelectorLengthValidator extends AbstractValidator {
 
         return true;
     }
-}
+};

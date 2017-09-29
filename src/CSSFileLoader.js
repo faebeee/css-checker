@@ -1,3 +1,4 @@
+
 "use strict";
 
 const cssjson = require('cssjson');
@@ -8,10 +9,19 @@ module.exports = class CSSFileLoader {
         this.cssObject = null;
     }
 
+    /**
+     *
+     * @returns {null|*}
+     */
     getCssObject() {
         return this.cssObject;
     }
 
+    /**
+     *
+     * @param path
+     * @returns {*|Object|Promise.<TResult>}
+     */
     loadFile(path) {
         return this._getCSSContent(path)
             .then((content) => {
@@ -20,6 +30,11 @@ module.exports = class CSSFileLoader {
             })
     }
 
+    /**
+     *
+     * @param css
+     * @returns {Promise}
+     */
     loadString(css) {
         return new Promise((res, rej) => {
             this.cssObject = cssjson.toJSON(css);
@@ -27,6 +42,12 @@ module.exports = class CSSFileLoader {
         })
     }
 
+    /**
+     *
+     * @param path
+     * @returns {Promise}
+     * @private
+     */
     _getCSSContent(path) {
         return new Promise((res, rej) => {
             fs.readFile(path, 'utf8', (err, contents) => {

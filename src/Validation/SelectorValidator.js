@@ -1,16 +1,27 @@
 "use stirct";
 
 module.exports = class SelectorValidator {
-    constructor(selectorRules) {
+    /**
+     *
+     * @param selectorRules
+     * @param {Array} validators
+     */
+    constructor(selectorRules, validators) {
         this.rules = selectorRules;
-        this.validatorClasses = [
-            require('./SelectorLength')
-        ]
-        this.valodators = [];
+        this.validatorClasses = validators || [
+            require('./Selector/SelectorLengthValidator'),
+            require('./Selector/SelectorIdValidator'),
+        ];
 
+
+        this.valodators = [];
         this._load();
     }
 
+    /**
+     *
+     * @private
+     */
     _load() {
         for (let i = 0; i < this.validatorClasses.length; i++) {
             let validatorClass = this.validatorClasses[i];
@@ -18,26 +29,32 @@ module.exports = class SelectorValidator {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @returns {Promise}
+     */
     validate(id) {
         return new Promise((res, rej) => {
+            let data = {
+                selector: id,
+            };
+
             let errors = [];
+
             for (let i = 0; i < this.valodators.length; i++) {
                 let validator = this.valodators[i];
                 let result = validator.validate(id);
-                if (result !== true) {
+                if(result !== true) {
                     errors.push({
-                        selector: id,
                         validator: validator.getName(),
-                        errors: result
+                        messages: result === true ? [] : result
                     });
                 }
             }
-
-            if (errors.length > 0) {
-                return rej(errors);
-            }
-            return res([]);
-        })
-
+            data['errors'] = errors;
+            return res(data);
+        });
     }
-}
+
+};
