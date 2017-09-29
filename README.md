@@ -38,6 +38,20 @@ this code will give you a result like
 
 [![result](./doc/result.png)](https://circleci.com/gh/faebeee/css-checker)
 
+
+you can also load the CSS from a file
+
+ 
+    ...
+    cssChecker.fromFile('path/to/file.css', rules)
+        .then((result) => {
+            cssChecker.render(result);
+        })
+        .catch((e) => {
+            unit.fail(e.message)
+        });
+
+
 Implemented Rules
 ====
 
