@@ -9,8 +9,9 @@ module.exports = class SelectorValidator {
     constructor(selectorRules, validators) {
         this.rules = selectorRules;
         this.validatorClasses = validators || [
-            require('./Selector/SelectorLengthValidator'),
+            require('./Selector/SelectorNameLengthValidator'),
             require('./Selector/SelectorIdValidator'),
+            require('./Selector/SelectorChainLengthValidator'),
         ];
 
 
@@ -45,7 +46,7 @@ module.exports = class SelectorValidator {
             for (let i = 0; i < this.valodators.length; i++) {
                 let validator = this.valodators[i];
                 let result = validator.validate(id);
-                if(result !== true) {
+                if(result !== true && result) {
                     errors.push({
                         validator: validator.getName(),
                         messages: result === true ? [] : result
