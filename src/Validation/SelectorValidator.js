@@ -15,7 +15,6 @@ module.exports = class SelectorValidator {
         for (let i = 0; i < this.validatorClasses.length; i++) {
             let validatorClass = this.validatorClasses[i];
             this.valodators.push(new validatorClass(this.rules));
-
         }
     }
 
@@ -33,6 +32,7 @@ module.exports = class SelectorValidator {
                     });
                 }
             }
+
             if (errors.length > 0) {
                 return rej(errors);
             }

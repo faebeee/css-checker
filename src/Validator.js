@@ -12,13 +12,11 @@ module.exports = class Validator {
     validate() {
         let elements = this.cssObject.children;
         let keys = Object.keys(elements);
-        console.log(keys.length);
         let validators = [];
         for (let i = 0; i < keys.length; i++) {
             let key = keys[i];
             let rule = elements[key];
             validators.push(this.validateRule(key, rule));
-
         }
         return Promise.all(validators);
     }
@@ -35,10 +33,10 @@ module.exports = class Validator {
         selector = this._replace(selector, '\n', ' ');
         let validator = new SelectorValidator(this.ruleLoader.getSelectorRules());
         return validator.validate(selector)
-
     }
 
     _validateChildren(children) {
+
         let keys = Object.keys(children);
         let validators = [];
         for (let i = 0; i < keys.length; i++) {
@@ -46,10 +44,12 @@ module.exports = class Validator {
             let rule = children[key];
             validators.push(this.validateRule(key, rule));
         }
+
         return Promise.all(validators)
     }
 
     _validateAttributes(attributes) {
+
         let keys = Object.keys(attributes);
         let validators = [];
         for (let i = 0; i < keys.length; i++) {

@@ -20,6 +20,13 @@ module.exports = class CSSFileLoader {
             })
     }
 
+    loadString(css) {
+        return new Promise((res, rej) => {
+            this.cssObject = cssjson.toJSON(css);
+            return res(this.cssObject);
+        })
+    }
+
     _getCSSContent(path) {
         return new Promise((res, rej) => {
             fs.readFile(path, 'utf8', (err, contents) => {

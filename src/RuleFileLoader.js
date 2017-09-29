@@ -2,7 +2,15 @@
 
 module.exports = class RuleFileLoader {
     constructor(path) {
-        this.rules = require(path);
+        if (typeof path === 'object') {
+            this.rules = path;
+        } else {
+            this.rules = require(path);
+        }
+
+        if (!this.rules.selector || !this.rules.attributes) {
+            throw new Error('Invalid config');
+        }
         this.selectorRules = this.rules.selector;
         this.attributeRules = this.rules.attributes;
     }

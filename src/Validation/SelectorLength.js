@@ -11,8 +11,9 @@ module.exports = class SelectorLengthValidator extends AbstractValidator {
         let parts = selector.split(' ');
 
         if (parts.length > this.rules.maxLength) {
-            return new Error('Selector too complex');
+            return 'Selector too complex';
         }
+
         return true;
     }
 }
