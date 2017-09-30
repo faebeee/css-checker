@@ -16,8 +16,6 @@ module.exports = class Renderer {
     }
 
     print() {
-        console.log(this.data);
-
         let table = contrib.table(
             {
                 keys: true,
@@ -43,6 +41,8 @@ module.exports = class Renderer {
                     data.push([result.selector, error.validator])
                 }
             }
+
+            console.log(this.data[i]);
         }
 
         table.setData(

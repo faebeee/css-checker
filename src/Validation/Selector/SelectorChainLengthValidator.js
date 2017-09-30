@@ -21,6 +21,9 @@ module.exports = class SelectorChainLengthValidator extends AbstractValidator {
 
         let css = new CssDom(selector+'{}');
         let selectors = css.dom[0].selectors;
+        if(!selectors){
+            return;
+        }
         for(let i = 0; i < selectors.length; i++){
             let selector = selectors[i];
             if(selector.split(' ').length > this.rules.maxChainLength){

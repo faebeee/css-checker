@@ -1,6 +1,5 @@
 "use strict";
 
-const path = require('path');
 const CSSFileLoader = require('./src/CSSFileLoader');
 const RuleFileLoader = require('./src/RuleFileLoader');
 const Validator = require('./src/Validator');
@@ -14,13 +13,14 @@ let loader = new CSSFileLoader();
  * @param {Object} validators
  */
 module.exports = function(cssFile, rules, validators ) {
-    return loader.loadFile(path.resolve(process.cwd(), cssFile))
+    return loader.loadFile(cssFile)
         .then((cssObject) => {
             return new Validator(new RuleFileLoader(rules), cssObject, validators );
         })
         .then((validator) => {
             return validator.validate();
         })
+        .then( data => console.log);
 };
 
 /**

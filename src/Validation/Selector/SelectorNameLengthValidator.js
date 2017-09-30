@@ -20,6 +20,9 @@ module.exports = class SelectorNameLengthValidator extends AbstractValidator {
 
         let css = new CssDom(selector+'{}');
         let selectors = css.dom[0].selectors;
+        if(!selectors){
+            return;
+        }
         for(let i = 0; i < selectors.length; i++){
             let selector = selectors[i];
             let names = selector.split(' ');

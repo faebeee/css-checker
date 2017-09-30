@@ -1,17 +1,15 @@
-"use stirct";
+'use strict';
 
-module.exports = class SelectorValidator {
+module.exports = class AttributeValidator {
     /**
      *
-     * @param selectorRules
+     * @param rules
      * @param {Array} validators
      */
-    constructor(selectorRules, validators) {
-        this.rules = selectorRules;
+    constructor(rules, validators) {
+        this.rules = rules;
         this.validatorClasses = validators || [
-            require('./Selector/SelectorNameLengthValidator'),
-            require('./Selector/SelectorIdValidator'),
-            require('./Selector/SelectorChainLengthValidator'),
+            require('./Attribute/FontSizeUnitValidator')
         ];
 
 
@@ -24,7 +22,6 @@ module.exports = class SelectorValidator {
      * @private
      */
     _load() {
-
         for (let i = 0; i < this.validatorClasses.length; i++) {
             let validatorClass = this.validatorClasses[i];
             this.valodators.push(new validatorClass(this.rules));
@@ -33,21 +30,23 @@ module.exports = class SelectorValidator {
 
     /**
      *
-     * @param id
      * @returns {Promise}
+     * @param selector
+     * @param {String} attribute
+     * @param {String} value
      */
-    validate(id) {
+    validate(selector, attribute, value) {
         return new Promise((res, rej) => {
             let data = {
-                selector: id,
+                selector: selector,
             };
 
             let errors = [];
 
             for (let i = 0; i < this.valodators.length; i++) {
                 let validator = this.valodators[i];
-                let result = validator.validate(id);
-                if(result !== true && result) {
+                let result = validator.validate(attribute, value);
+                if (result !== true && result) {
                     errors.push({
                         validator: validator.getName(),
                         messages: result === true ? [] : result
@@ -58,5 +57,4 @@ module.exports = class SelectorValidator {
             return res(data);
         });
     }
-
 };
