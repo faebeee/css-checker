@@ -37,12 +37,7 @@ module.exports = class AttributeValidator {
      */
     validate(selector, attribute, value) {
         return new Promise((res, rej) => {
-            let data = {
-                selector: selector,
-            };
-
             let errors = [];
-
             for (let i = 0; i < this.valodators.length; i++) {
                 let validator = this.valodators[i];
                 let result = validator.validate(attribute, value);
@@ -53,8 +48,16 @@ module.exports = class AttributeValidator {
                     });
                 }
             }
-            data['errors'] = errors;
-            return res(data);
+            
+            if(errors.length > 0){
+                return res({
+                    selector,
+                    errors
+                });
+            }
+            return res({
+                    selector,
+                });
         });
     }
 };

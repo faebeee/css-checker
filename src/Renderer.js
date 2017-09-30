@@ -25,8 +25,10 @@ module.exports = class Renderer {
                 interactive: true,
                 label: 'Result',
                 border: {type: "line", fg: "cyan"},
-                columnWidth: [30, 70],
-                width: 100
+                columnWidth: [3, 50, 30],
+                columnSpacing : 10,
+                width: "100%",
+                
             });
 
         //allow control the table with the keyboard
@@ -35,19 +37,29 @@ module.exports = class Renderer {
         let data = [];
         for (let i = 0; i < this.data.length; i++) {
             let result = this.data[i].selector;
+            let attributesResults = this.data[i].attributes;
+        
             if (result.errors) {
                 for (let x = 0; x < result.errors.length; x++) {
                     let error = result.errors[x];
-                    data.push([result.selector, error.validator])
+                    data.push(['SEL', result.selector, error.validator])
                 }
             }
-
-            console.log(this.data[i]);
+            
+            for(let i = 0; i < attributesResults.length; i++){
+                let attributesResult = attributesResults[i];
+                if(attributesResult.errors){
+                for (let x = 0; x < attributesResult.errors.length; x++) {
+                    let error = attributesResult.errors[x];
+                    data.push(['ATT', attributesResult.selector, error.validator])
+                }
+                }
+            }
         }
 
         table.setData(
             {
-                headers: ['Selector', 'Validator'],
+                headers: ['Category', 'Selector', 'Validator'],
                 data
             });
         this.screen.append(table); //must append before setting data

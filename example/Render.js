@@ -9,10 +9,12 @@ let rules = {
         maxChainLength: 2,
         allowId : false
     },
-    attributes: {}
+    attributes: {
+        fontSizeUnit : "rem"
+    }
 };
 
-cssChecker.fromString('.test .test2 .test, .test #id { width: 100%; } #id{background:blue;} .MyVeeeeeeeeeeryLongName{width:100%}', rules)
+cssChecker.fromString('.test .test2 .test, .test #id { width: 100%; } #id{background:blue;} .MyVeeeeeeeeeeryLongName{width:100%; font-size : 14px;}', rules)
     .then((result) => {
         cssChecker.render(result);
     })

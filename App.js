@@ -19,8 +19,7 @@ module.exports = function(cssFile, rules, validators ) {
         })
         .then((validator) => {
             return validator.validate();
-        })
-        .then( data => console.log);
+        });
 };
 
 /**
@@ -35,7 +34,7 @@ module.exports.fromString = function(string, rules, validators) {
         })
         .then((validator) => {
             return validator.validate();
-        })
+        });
 };
 
 module.exports.render = function( data ){

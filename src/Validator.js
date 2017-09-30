@@ -70,6 +70,7 @@ module.exports = class Validator {
      * @param {String} value
      */
     _validateAttribute(selector, attribute, value) {
+        selector = this._replace(selector, '\n', ' ');
         return this.attributeValidator.validate(selector, attribute, value)
     }
 

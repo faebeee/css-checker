@@ -5,7 +5,6 @@ const cssChecker = require('../App');
 
 let rules = {
     selector: {
-        maxNameLength: 10,
         maxChainLength: 2,
         allowId : false
     },
@@ -16,7 +15,6 @@ let rules = {
 
 cssChecker(__dirname+'/../data/file1.css', rules)
     .then((result) => {
-        console.log(result);
         cssChecker.render(result);
     })
     .catch((e) => {
