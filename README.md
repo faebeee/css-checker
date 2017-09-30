@@ -1,4 +1,4 @@
-css-checker
+styleguide
 ===
 
 [![CircleCI](https://circleci.com/gh/faebeee/css-checker.svg?style=svg)](https://circleci.com/gh/faebeee/css-checker)
@@ -7,14 +7,14 @@ Setup
 ===
 install
 
-    npm install css-checker --save-dev
+    npm install styleguide --save-dev
     
 create your file to validate the css
 
     "use strict";
     
     const unit = require('unit.js');
-    const cssChecker = require('css-checker');
+    const styleguide = require('styleguide');
     
     let rules = {
         selector: {
@@ -25,9 +25,9 @@ create your file to validate the css
         attributes: {}
     };
     
-    cssChecker.fromString('.test .test2 .test { width: 100%; } #id{background:blue;}', rules)
+    styleguide.fromString('.test .test2 .test { width: 100%; } #id{background:blue;}', rules)
         .then((result) => {
-            cssChecker.render(result);
+            styleguide.render(result);
         })
         .catch((e) => {
             unit.fail(e.message)
@@ -43,7 +43,7 @@ you can also load the CSS from a file
 
  
     ...
-    cssChecker.fromFile('path/to/file.css', rules)
+    styleguide.fromFile('path/to/file.css', rules)
         .then((result) => {
             cssChecker.render(result);
         })
