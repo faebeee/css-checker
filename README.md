@@ -7,14 +7,14 @@ Setup
 ===
 install
 
-    npm install styleguide --save-dev
+    npm install css-styleguide-validator --save-dev
     
 create your file to validate the css
 
     "use strict";
     
     const unit = require('unit.js');
-    const styleguide = require('styleguide');
+    const styleguide = require('css-styleguide-validator');
     
     let rules = {
         selector: {
