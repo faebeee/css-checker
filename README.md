@@ -3,6 +3,10 @@ styleguide
 
 [![CircleCI](https://circleci.com/gh/faebeee/css-checker.svg?style=svg)](https://circleci.com/gh/faebeee/css-checker)
 
+ToDos
+===
+- Add `line-height` unit validator
+
 Setup
 ===
 install
