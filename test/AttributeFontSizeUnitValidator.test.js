@@ -13,10 +13,9 @@ describe('AttributeFontSizeUnitValidator', function () {
 
     it('valid unit', (done) => {
         let rules = {
-            selector: {
-            },
+            selector: {},
             attributes: {
-                fontSizeUnit : 'rem'
+                fontSizeUnit: 'rem'
             }
         };
 
@@ -32,10 +31,9 @@ describe('AttributeFontSizeUnitValidator', function () {
 
     it('invalid unit', (done) => {
         let rules = {
-            selector: {
-            },
+            selector: {},
             attributes: {
-                fontSizeUnit : 'rem'
+                fontSizeUnit: 'rem'
             }
         };
 
@@ -52,15 +50,13 @@ describe('AttributeFontSizeUnitValidator', function () {
 
     it('disabled', (done) => {
         let rules = {
-            selector: {
-            },
-            attributes: {
-            }
+            selector: {},
+            attributes: {}
         };
 
         cssChecker.fromString('#test { font-size: 12px; }', rules, VALIDATOR)
             .then((result) => {
-                unit.array(result[0].attributes[0].errors).hasLength(0);
+                unit.object(result[0].attributes[0]).hasNotProperty("errors");
                 done();
             })
             .catch((e) => {
